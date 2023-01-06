@@ -439,7 +439,7 @@
                                 </span>
                             </div>
                         </div>
-                        <table width="100%" class="my_tab" style="margin-top: 20px;table-layout: fixed;font-size:19px;">
+                        <table width="100%" class="my_tab" style="margin-top: 20px;table-layout: fixed;font-size:17px;">
                             <tr>
                                 <th style="border: dashed black 1px;text-align: center;border-top: 1px dashed black;padding:1px">
                                     <span>No.</span>
@@ -456,8 +456,8 @@
                                 <th style="border: dashed black 1px;text-align: center;border-top: 1px dashed black;padding:1px">
                                     <span>Lot</span>
                                 </th>
-                                <th style="border: dashed black 1px;text-align: center;border-top: 1px dashed black;padding:1px">
-                                    <span>Expiry<br/>Date</span>
+                                <th colspan='2' style="border: dashed black 1px;text-align: center;border-top: 1px dashed black;padding:1px">
+                                    <span>Expiry Date</span>
                                 </th>
                             </tr>
                             <span t-set="counter" t-value="1"/>
@@ -469,34 +469,37 @@
                                 <td style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
                                     <span t-esc="counter"/>
                                 </td>
-                                <td colspan="3" style="border: dashed black 1px;border-top: 1px dashed black;padding:1px">
+                                <td colspan="8" style="border: dashed black 1px;border-top: 1px dashed black;padding:1px">
                                     <span t-esc="line.product_id.barcode"/> &#160;&#160; <span t-esc="line.product_id.name"/>
                                 </td>
-                                <td style="border: dashed black 1px;text-align: center;border-top: 1px dashed black;padding:1px">
-                                    <span t-esc="line.product_uom_id and line.product_uom_id.name or ''"/>
-                                </td>
-                                <td style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
-                                    <span t-esc="'%.2f'%(line.quantity)"/>
-                                </td>
-                                <t t-foreach='lot_vals' t-as='vals'>
-                                    <t t-if="vals['product_id'] == line.product_id.id">
-                                        <span t-set="lot_value" t-value="1"/>
+                                <tr>
+                                    <td colspan='4' style="border: dashed black 1px;text-align: center;border-top: 1px dashed black;padding:1px"/>
+                                    <td style="border: dashed black 1px;text-align: center;border-top: 1px dashed black;padding:1px">
+                                        <span t-esc="line.product_uom_id and line.product_uom_id.name or ''"/>
+                                    </td>
+                                    <td style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
+                                        <span t-esc="'%.2f'%(line.quantity)"/>
+                                    </td>
+                                    <t t-foreach='lot_vals' t-as='vals'>
+                                        <t t-if="vals['product_id'] == line.product_id.id">
+                                            <span t-set="lot_value" t-value="1"/>
+                                            <td style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
+                                                <span t-esc="vals['lot_name']"/>
+                                            </td>
+                                            <td colspan='2' style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
+                                                <span t-esc="vals['expiry_date']"/>
+                                            </td>
+                                        </t>
+                                    </t>
+                                    <t t-if='lot_value == 0'>
                                         <td style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
-                                            <span t-esc="vals['lot_name']"/>
+                                            <span/>
                                         </td>
-                                        <td style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
-                                            <span t-esc="vals['expiry_date']"/>
+                                        <td colspan='2' style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
+                                            <span/>
                                         </td>
                                     </t>
-                                </t>
-                                <t t-if='lot_value == 0'>
-                                    <td style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
-                                        <span/>
-                                    </td>
-                                    <td style="border: dashed black 1px;border-top: 1px dashed black;text-align: center;padding:1px">
-                                        <span/>
-                                    </td>
-                                </t>
+                                </tr>
                                 <span t-set="counter" t-value="counter + 1"/>
                                 <span t-set="total_qty" t-value="total_qty + line.quantity"/>
                             </tr>
