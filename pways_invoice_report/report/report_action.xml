@@ -28,5 +28,18 @@
             <field name="paperformat_id" ref="pways_invoice_report.paperformat110"/>
             <field name="binding_type">report</field>
         </record>
+
+        <record id="action_report_invoice_report_details_inherit" model="ir.actions.report">
+            <field name="name">Details Of Invoice</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pways_invoice_report.main_sale_tax_invoice_details</field>
+            <field name="report_file">pways_invoice_report.main_sale_tax_invoice_details</field>
+            <field name="print_report_name">'Invoice - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="paperformat_id" ref="pways_invoice_report.paperformat110"/>
+            <field name="binding_type">report</field>
+        </record>
+
     </data>
 </odoo>

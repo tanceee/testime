@@ -9,6 +9,7 @@
         'views/res_partner_view.xml',
         "report/report_action.xml",
         "report/template_tax_invoice.xml",
+        "report/template_invoice_details.xml",
     ],
     "license": "LGPL-3",
     "installable": True,

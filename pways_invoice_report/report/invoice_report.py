@@ -2,7 +2,7 @@
 from odoo import api, models
 from datetime import datetime
 
-class SaleTaxInvioiceReport(models.AbstractModel):
+class SaleTaxInvioiceReport110(models.AbstractModel):
     _name = 'report.pways_invoice_report.main_sale_tax_invoice110'
     _description = 'Report Invoice'
 
@@ -78,5 +78,31 @@ class SaleTaxInvioiceReport(models.AbstractModel):
             'get_rate_info': self.get_rate_info,
             'get_base_currency_total': self.get_base_currency_total,
             'get_discount': self.get_discount,
+            'get_invoiced_lot_values': self.get_invoiced_lot_values
+        }
+
+class SaleTaxInvioiceReportDetails(models.AbstractModel):
+    _name = 'report.pways_invoice_report.main_sale_tax_invoice_details'
+    _description = 'Report Invoice Details'
+
+    @api.model
+    def get_date(self, invoice):
+        date = ''
+        if invoice.invoice_date:
+            date = datetime.strptime(str(invoice.invoice_date),"%Y-%m-%d").strftime('%d/%m/%Y')
+        return date
+
+    def get_invoiced_lot_values(self, move):
+        return move._get_invoiced_lot_values()
+
+    @api.model
+    def _get_report_values(self, docids, data=None):
+        model = self.env.context.get('active_model')
+        docs = self.env['account.move'].browse(docids[0])
+        return {
+            'doc_model': 'account.move',
+            'data': data,
+            'docs': docs,
+            'get_date': self.get_date,
             'get_invoiced_lot_values': self.get_invoiced_lot_values
         }
