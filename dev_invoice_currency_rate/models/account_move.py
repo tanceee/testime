@@ -15,7 +15,7 @@ from odoo.tools import float_round
 class account_move(models.Model):
     _inherit = 'account.move'
 
-    currency_rate = fields.Float('Inverse Rate', digits=0, readonly=True, states={'draft': [('readonly', False)]})
+    currency_rate = fields.Float('Inverse Rate', digits=(12, 6), readonly=True, states={'draft': [('readonly', False)]})
     is_same_currency = fields.Boolean('Same Currency')
 
     @api.onchange('currency_id')
@@ -83,7 +83,7 @@ class SaleOrder(models.Model):
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
-    currency_rate_inverse = fields.Float("Currency Rate Inverse", digits=0)
+    currency_rate_inverse = fields.Float("Currency Rate Inverse")
     is_same_currency = fields.Boolean('Same Currency')
 
     @api.onchange("currency_id")

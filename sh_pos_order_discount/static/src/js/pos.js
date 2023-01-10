@@ -1,6 +1,5 @@
 odoo.define("sh_pos_order_discount.pos", function (require) {
     var models = require("point_of_sale.models");
-    var field_utils = require("web.field_utils");
 
     var _super_orderline = models.Orderline.prototype;
     models.Orderline = models.Orderline.extend({
@@ -30,12 +29,6 @@ odoo.define("sh_pos_order_discount.pos", function (require) {
         },
         get_total_discount: function () {
             return this.total_discount || false;
-        },
-        set_custom_discount: function (discount) {
-            var disc = Math.min(Math.max(discount || 0, 0), 100);
-            this.discount = field_utils.format.float(disc, { digits: [69, 4]});
-            this.discountStr = '' +  field_utils.format.float(disc, { digits: [69, 4]});
-            this.trigger('change', this);
         },
     });
 

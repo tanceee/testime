@@ -9,7 +9,7 @@
     "license": "OPL-1",
     "summary": "POS Product Discount Point Of Sale Discount Point Of Sale Order Line Discount POS Custom Discount Point Of Sale Global Discount Point Of Sale Line Discount POS Line Discount POS Global Discount POS Order Discount POS Order Line Discount Odoo",
     "description": """Currently, in odoo point of sale, you can apply discount individually on every order line only. The "Point Of Sale Order Discount" module allows you to give discounts globally. This module applies the discounts on the point of sale order line as well as on the whole order. You can apply multiple discounts per order & order line. The discount can be applied in a fixed amount or percentage amount. Applied discount print on the receipt.""",
-    "version": "15.0.4",
+    "version": "15.0.1",
     "depends": ["point_of_sale"],
     "application": True,
     "data": ['views/pos_config_setting.xml', ],

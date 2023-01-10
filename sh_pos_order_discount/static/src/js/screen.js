@@ -31,16 +31,13 @@ odoo.define("sh_pos_order_discount.screen", function (require) {
                 var mode = this.state.numpadMode;
                 var order = this.env.pos.get_order();
                 if (order.get_selected_orderline()) {
-                    if (mode == "discount" && this.env.pos.config.sh_allow_order_line_discount) {
+                    if (mode == "discount") {
                         order.get_selected_orderline().set_discount(0);
-                        var sh_dic =order.get_selected_orderline().get_global_discount()
-                        sh_dic = parseFloat(sh_dic).toFixed(2)
-                        order.get_selected_orderline().set_discount(sh_dic);
+                        order.get_selected_orderline().set_discount(order.get_selected_orderline().get_global_discount());
 
                         var price = order.get_selected_orderline().get_display_price();
                         var current_price = (price * val) / 100;
                         var discount = ((order.get_selected_orderline().price * order.get_selected_orderline().quantity - current_price) / (order.get_selected_orderline().price * order.get_selected_orderline().quantity)) * 100;
-                        discount = discount.toFixed(2)
                         order.get_selected_orderline().set_discount(discount);
                     }
                 }
